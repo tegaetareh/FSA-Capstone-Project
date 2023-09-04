@@ -20,13 +20,13 @@ export default function Products() {
 
     return (
 
-        < div key={products.id}>
+        < div >
             <h1>PRODUCTS</h1>
             <main >
                 {
-                    products.map((product) => (
+                    products.map((product, i) => (
                         <ProductCard
-                             key={product.id}
+                             key={i}
                             product={product}
                             fetchAllproducts={fetchData}
                         />   
