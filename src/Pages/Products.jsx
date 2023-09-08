@@ -20,8 +20,8 @@ export default function Products() {
 
     return (
 
-        < div >
-            <h1>PRODUCTS</h1>
+        < div className="allProducts">
+            {/* <h1>PRODUCTS</h1> */}
             <main >
                 {
                     products.map((product, i) => (
