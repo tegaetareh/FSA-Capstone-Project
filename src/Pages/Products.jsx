@@ -24,6 +24,7 @@ export default function Products() {
             {/* <h1>PRODUCTS</h1> */}
             <main >
                 {
+                    // TODO: SHOW LOADING BAR WHILE PRODUCT IS LOADING
                     products.map((product, i) => (
                         <ProductCard
                              key={i}

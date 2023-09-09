@@ -24,6 +24,7 @@ export default function Footer() {
                 </li>
             </ul> */}
             <p>Copyright © Tega Etareh. Fullstack Accademy Capstone Project</p>
+            {/* TODO: Add socials and github links */}
 
         </div>
 
