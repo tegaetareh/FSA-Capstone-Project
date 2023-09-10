@@ -23,3 +23,17 @@ export async function fetchProducts() {
       console.error(err);
     }
   }
+
+  export async function fetchCategory(category) {
+    try {
+      const response = await fetch(
+        `${API_URL}/products/category/${category}`
+      );
+      const result = await response.json();
+    //   console.log("Product by category", result)
+      return result;
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  
