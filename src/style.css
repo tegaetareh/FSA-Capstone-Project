@@ -116,7 +116,7 @@ ul {
     height: 200px;
 }
 
-.single-product img{
+.single-product img {
     width: 500px;
 }
 
@@ -132,3 +132,57 @@ ul {
     align-items: center;
     /* align-content: center; */
 }
+
+.ssf {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.ssf input[type="radio"] {
+    margin: 10px;
+}
+/* styling for tabbed search filter and sort */
+/* .mytabs {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 50px;
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 25px;
+
+}
+
+.mytabs input[type="radio"] {
+    display: none;
+}
+
+.mytabs label {
+    padding: 25px;
+    background: #fff;
+    font-weight: bold;
+}
+
+.mytabs .tab {
+    width: 100%;
+    padding: 20px;
+    background-color: aliceblue;
+    order: 1;
+    display: none
+}
+
+.mytabs .tab h4 {
+    font-size: 2em;
+}
+
+.mytabs input[type="radio"]:checked+label+.tab {
+    display: block;
+}
+
+.mytabs input[type="radio"]:checked+label {
+    background-color: aliceblue;
+}
+
+ .categoryFilter  input[type="radio"] {
+    display:block
+} */
