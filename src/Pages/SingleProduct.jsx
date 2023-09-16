@@ -21,12 +21,13 @@ export default function SingleProduct() {
 
       return (
             <div className="single-product">
-                <Link to='/'>Back to All Products</Link>
+                
                 
                 <h2>{title}</h2>
                 <p>{description}</p>
                 <p>${price}</p>
                 <img src={image} alt={title} />
+                <Link to='/'><button>Back to All Products</button></Link>
             </div>
       )
      

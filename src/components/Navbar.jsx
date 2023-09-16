@@ -1,7 +1,8 @@
 import { Link, useNavigate } from "react-router-dom"
 
-export default function Navbar() {
+export default function Navbar({cart, setCart}) {
     const navigate = useNavigate();
+    console.log("cart in nav", cart)
     function goToHome() {
 
         navigate('/');
@@ -24,6 +25,10 @@ export default function Navbar() {
                 </li>
                 <li>
                     <Link to="/products">Categories</Link>
+                </li>
+                <li>
+                    <Link to="/cart">Cart {cart.length} </Link>
+                    {/* todo: show cart length only if its > 0 */}
                 </li>
 
 

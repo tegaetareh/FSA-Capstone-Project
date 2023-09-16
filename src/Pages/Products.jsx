@@ -5,13 +5,13 @@ import { SampleData } from "../API/SampleData"
 
 
 
-export default function Products() {
+export default function Products({cart, setCart}) {
     // var filterdByCategory =false
     const [products, setProducts] = useState([SampleData])
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [filteredCategory, setFilteredCategory] = useState([]);
     const [filteredByCategory, setFilteredByCategory] = useState(false)
-    console.log(filteredByCategory)
+    // console.log(filteredByCategory)
     async function fetchData() {
         const result = await fetchProducts()
         setProducts(result)
@@ -73,6 +73,8 @@ export default function Products() {
                             key={i}
                             product={product}
                             fetchAllproducts={fetchData}
+                            cart={cart} 
+                            setCart={setCart} 
                         />
                     ))
 
@@ -84,6 +86,8 @@ export default function Products() {
                             key={i}
                             product={product}
                             fetchAllproducts={fetchData}
+                            cart={cart} 
+                            setCart={setCart} 
                         />
                     ))
 
