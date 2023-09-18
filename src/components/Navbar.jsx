@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom"
 
-export default function Navbar({cart, setCart}) {
+export default function Navbar({ cart, setCart, token, setToken }) {
     const navigate = useNavigate();
     console.log("cart in nav", cart)
     function goToHome() {
@@ -9,11 +9,37 @@ export default function Navbar({cart, setCart}) {
 
     }
 
+    function handleLogout() {
+        setToken('')
+        setCart([])
+        // localStorage.removeItem('Token');
+        console.log("navbar", token);
+
+    }
+
     return (
 
         <div className="navbar">
             <h1 className="logo"> <a href="#" onClick={goToHome}>FakeStore</a></h1>
-            <ul className="nav-links">
+            {token ? <ul className="nav-links">
+
+                <li>
+                    <Link to="/">Home</Link>
+                </li>
+                <li>
+                    <a href="#" onClick={handleLogout}>Logout</a>
+                </li>
+                <li>
+                    <Link to="/products">Shop Products</Link>
+                </li>
+                <li>
+                    <Link to="/products">Categories</Link>
+                </li>
+                <li>
+                    <Link to="/cart">Cart {cart.length} </Link>
+                    {/* todo: show cart length only if its > 0 */}
+                </li>
+            </ul> : <ul className="nav-links">
                 <li>
                     <Link to="/">Home</Link>
                 </li>
@@ -26,14 +52,11 @@ export default function Navbar({cart, setCart}) {
                 <li>
                     <Link to="/products">Categories</Link>
                 </li>
-                <li>
-                    <Link to="/cart">Cart {cart.length} </Link>
-                    {/* todo: show cart length only if its > 0 */}
-                </li>
+               
 
 
 
-            </ul>
+            </ul>}
         </div>
 
 

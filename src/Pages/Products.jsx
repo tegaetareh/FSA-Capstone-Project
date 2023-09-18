@@ -5,12 +5,14 @@ import { SampleData } from "../API/SampleData"
 
 
 
-export default function Products({cart, setCart}) {
+export default function Products({ token, cart, setCart }) {
     // var filterdByCategory =false
     const [products, setProducts] = useState([SampleData])
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [filteredCategory, setFilteredCategory] = useState([]);
     const [filteredByCategory, setFilteredByCategory] = useState(false)
+    const [sortBy, setSortBy] = useState('price');
+    const [priceRange, setPriceRange] = useState(1000);
     // console.log(filteredByCategory)
     async function fetchData() {
         const result = await fetchProducts()
@@ -41,6 +43,27 @@ export default function Products({cart, setCart}) {
         if (e.target.value === "all") { setFilteredByCategory(false) }
 
     }
+    function selectSortBy(e) {
+        setSortBy(e.target.value);
+      }
+    
+      function sortByPrice(ascending) {
+        filteredProducts.sort((a, b) => {
+          if (!ascending) {
+            return b.price - a.price
+          }
+          return a.price - b.price
+        })
+      }
+      if(sortBy === 'price') {
+        sortByPrice();
+      } else if (sortBy === 'rating') {
+        filteredProducts.sort((a, b) => b.rating.rate - a.rating.rate);
+      }
+      
+      let finalRender =filteredProducts.filter(product => product.price <= priceRange);
+      console.log(priceRange)
+
 
 
     return (
@@ -51,7 +74,7 @@ export default function Products({cart, setCart}) {
                 {/* ssf is search sort and filter */}
 
                 <form onSubmit={handleSearch}>
-                <b>Search: </b><input className="searchbar" onChange={handleSearch} type="text" id="search" />
+                    <b>Search: </b><input className="searchbar" onChange={handleSearch} type="text" id="search" />
                 </form >
                 <form ><b>Filter: </b>
                     <input value="electronics" type="radio" name="category" id="eletronics" onChange={handleCategory} /><label>Eletronics</label>
@@ -60,6 +83,13 @@ export default function Products({cart, setCart}) {
                     <input value="women's clothing" type="radio" name="category" id="women's clothing" onChange={handleCategory} /><label>Womens Clothing</label>
                     <input value="all" type="radio" name="category" id="all" onChange={handleCategory} /><label>All</label>
 
+                </form>
+                Min Price<input type="range" min="20" max="1000" value={priceRange} onChange={(e) => setPriceRange(e.target.value)}/>Max Price
+                <form><b>Sort: </b>
+                    <select value={sortBy} onChange={selectSortBy}>
+                        <option value="price">Price</option>
+                        <option value="rating">Rating</option>
+                    </select>
                 </form>
             </div>
 
@@ -73,21 +103,21 @@ export default function Products({cart, setCart}) {
                             key={i}
                             product={product}
                             fetchAllproducts={fetchData}
-                            cart={cart} 
-                            setCart={setCart} 
+                            cart={cart}
+                            setCart={setCart}
                         />
                     ))
 
 
                     :
 
-                    filteredProducts.map((product, i) => (
+                    finalRender.map((product, i) => (
                         <ProductCard
                             key={i}
                             product={product}
                             fetchAllproducts={fetchData}
-                            cart={cart} 
-                            setCart={setCart} 
+                            cart={cart}
+                            setCart={setCart}
                         />
                     ))
 

@@ -36,4 +36,48 @@ export async function fetchProducts() {
       console.error(err);
     }
   }
+
+//get all users
+export async function fetchUsers() {
+    try {
+      const response = await fetch(
+        `${API_URL}/users`
+      );
+      const result = await response.json();
+      return result;
+      
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+//login
+export async function loginFunction(username, password, setError) {
+    try {
+        const response = await fetch('https://fakestoreapi.com/auth/login',
+            {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+
+                    username: username,
+                    password: password
+
+                })
+            })
+        const result = await response.json();
+        
+
+        console.log(result.token);
+        return result.token
+
+
+    } catch (error) {
+        console.log(error.message)
+        setError("Invalid username or password");
+        
+    }
+}
   
