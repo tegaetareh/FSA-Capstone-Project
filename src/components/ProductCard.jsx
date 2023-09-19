@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 export default function ProductCard({ product, fetchAllproducts, cart, setCart }) {
     const { id, title, description, image, price } = product;
@@ -10,50 +10,21 @@ export default function ProductCard({ product, fetchAllproducts, cart, setCart }
         navigate(`/products/${id}`)
 
     }
-const uniqueArray = [];
+    const uniqueArray = [];
     function addToCart(product) {
 
- let cartItem = {
+        let cartItem = {
             ...product,
             quantity: cartQuantity
         }
 
-        // console.log("product quantity before ", cartItem.quantity)
-        function objectExists(arr, id) {
-            let isIdFound = false;
-            console.log("id", id)
-            console.log("array is ", arr)
-            console.log("array length ", arr.length)
-            for (let i = 0; i < arr.length; i++) {
-                if (arr[i].id === id) {
-                    console.log("array is is ", arr[i].id)
-                    isIdFound = true;
-                    break;
-                }
-            }
-            console.log("array length ", arr.length)
-            return isIdFound
-        }
-        console.log("Exists? ", objectExists(cart, id));
-        if (objectExists(cart, id)) {
-
-            let newQuantity = cartQuantity + 1
-            setCartQuantity(newQuantity);
-        }
-       
-        /////code to filter array/////////////////
-        
-        const idSet = new Set();
-        for (const obj of cart) {
-            if (!idSet.has(obj.id)) {
-                idSet.add(obj.id);
-                uniqueArray.push(obj);
-            }
-            console.log("UNIQUE ARRAY",uniqueArray)
-        }
 
         setCart([...cart, cartItem]);
+        localStorage.setItem('Cart', JSON.stringify(cart));
+
+
     }
+    
 
 
     return (
