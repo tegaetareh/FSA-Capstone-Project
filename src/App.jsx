@@ -1,33 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
+import { useState } from "react"
+import { Route, Routes } from "react-router-dom"
+import Products from "./Pages/Products"
+import './style.css'
+import SingleProduct from "./Pages/SingleProduct"
+import Login from "./Pages/Login"
+import Navbar from "./components/Navbar"
+import Footer from "./components/footer"
+import Cart from "./Pages/Cart"
 function App() {
-  const [count, setCount] = useState(0)
+  const [token, setToken] = useState(localStorage.getItem('Token'))
+  const [cart, setCart] = useState([]);
+  console.log("Cart: ",cart);
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <Navbar cart={cart} setCart={setCart} token={token} setToken={setToken}/>
+    
+      <Routes>
+        <Route path="/" element={<Products cart={cart} setCart={setCart}  />} />
+        <Route path="/products" element={<Products cart={cart} setCart={setCart}  />} />
+        <Route path="/login" element={<Login token={token} setToken={setToken}/>} />
+        <Route path='/products/:id' element={<SingleProduct cart={cart} setCart={setCart}  />} />
+        <Route path="/cart" element={<Cart cart={cart} setCart={setCart}/>} />
+      </Routes>
+      <Footer />
     </>
   )
 }
