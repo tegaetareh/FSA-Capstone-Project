@@ -19,6 +19,7 @@ export default function Login({ token, setToken }) {
         const result = await loginFunction(username, password, setError)
         console.log ("result is", result)
         setToken(result)
+        localStorage.setItem('Token', result);
         console.log("token is ", token)
         setUsername('')
         setPassword('')

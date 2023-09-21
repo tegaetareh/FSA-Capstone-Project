@@ -12,7 +12,8 @@ export default function Navbar({ cart, setCart, token, setToken }) {
     function handleLogout() {
         setToken('')
         setCart([])
-        // localStorage.removeItem('Token');
+        localStorage.removeItem('Token');
+        localStorage.removeItem('Cart');
         console.log("navbar", token);
 
     }
