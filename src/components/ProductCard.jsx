@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-export default function ProductCard({ product, fetchAllproducts, cart, setCart }) {
+export default function ProductCard({ product, fetchAllproducts, cart, setCart , token}) {
     const { id, title, description, image, price } = product;
     const navigate = useNavigate();
     // console.log(id, title, price)
     const [cartQuantity, setCartQuantity] = useState(1)
+
 
     function goToLinkID(id) {
         navigate(`/products/${id}`)
@@ -12,12 +13,24 @@ export default function ProductCard({ product, fetchAllproducts, cart, setCart }
     }
     const uniqueArray = [];
     function addToCart(product) {
+        
+            //console.log("token is", localStorage.getItem('Token'))
+            if (!localStorage.getItem('Token')){
+                console.log("no token here")
+                return alert("Please login to add to products to cart")
+
+            }else {
+                console.log("token is", localStorage.getItem('Token'))
+            }
+        
 
         let cartItem = {
             ...product,
             quantity: cartQuantity
         }
 
+        ////cart increase quantity code
+        console.log("Product already in cart? ", cart.includes(product))
 
         setCart([...cart, cartItem]);
         localStorage.setItem('Cart', JSON.stringify(cart));

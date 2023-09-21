@@ -13,7 +13,7 @@ export default function Products({ token, cart, setCart }) {
     const [filteredByCategory, setFilteredByCategory] = useState(false)
     const [sortBy, setSortBy] = useState('price');
     const [priceRange, setPriceRange] = useState(1000);
-    // console.log(filteredByCategory)
+    //console.log("token in products page", token)
     async function fetchData() {
         const result = await fetchProducts()
         setProducts(result)
@@ -105,6 +105,7 @@ export default function Products({ token, cart, setCart }) {
                             fetchAllproducts={fetchData}
                             cart={cart}
                             setCart={setCart}
+                            token = {token}
                         />
                     ))
 
@@ -118,6 +119,7 @@ export default function Products({ token, cart, setCart }) {
                             fetchAllproducts={fetchData}
                             cart={cart}
                             setCart={setCart}
+                            token ={token}
                         />
                     ))
 

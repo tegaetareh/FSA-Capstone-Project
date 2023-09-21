@@ -18,9 +18,10 @@ export default function Login({ token, setToken }) {
         event.preventDefault();
         const result = await loginFunction(username, password, setError)
         console.log ("result is", result)
-        setToken(result)
+        
         localStorage.setItem('Token', result);
-        console.log("token is ", token)
+        setToken(localStorage.getItem('Token')) //change to setToken(result) if code breaks
+        console.log("Login page token is ", token)
         setUsername('')
         setPassword('')
         if(result){navigateToProduct();}
