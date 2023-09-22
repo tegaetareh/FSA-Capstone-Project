@@ -28,6 +28,7 @@ export default function SingleProduct() {
                 <p>${price}</p>
                 <img src={image} alt={title} />
                 <Link to='/'><button>Back to All Products</button></Link>
+                <button>Add to Cart</button>
             </div>
       )
      

@@ -10,11 +10,18 @@ export default function Cart({ token, cart, setCart }) {
         navigate('/products');
 
     };
+
     function deleteItem(id) {
         setCart(cart.filter(item => item.id !== id));
         localStorage.setItem('Cart', JSON.stringify(cart));
+        console.log("cart lenght", cart.length)
+        
     }
     console.log("cart :", cart)
+
+    useEffect(() => {
+        if (!cart.length) navigateToProduct()
+    }, [cart]);
 
 
     return (
