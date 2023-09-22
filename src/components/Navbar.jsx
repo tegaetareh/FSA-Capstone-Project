@@ -37,7 +37,7 @@ export default function Navbar({ cart, setCart, token, setToken }) {
                     <Link to="/products">Categories</Link>
                 </li>
                 <li>
-                    <Link to="/cart">Cart {cart.length} </Link>
+                    <Link to="/cart">Cart {(cart.length>0)&& cart.length} </Link>
                     {/* todo: show cart length only if its > 0 */}
                 </li>
             </ul> : <ul className="nav-links">
