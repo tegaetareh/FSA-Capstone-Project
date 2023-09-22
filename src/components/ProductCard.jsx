@@ -4,7 +4,7 @@ export default function ProductCard({ product, fetchAllproducts, cart, setCart ,
     const { id, title, description, image, price } = product;
     const navigate = useNavigate();
     // console.log(id, title, price)
-    const [cartQuantity, setCartQuantity] = useState(1)
+    //const [cartQuantity, setCartQuantity] = useState(1)
 
 
     function goToLinkID(id) {
@@ -24,15 +24,32 @@ export default function ProductCard({ product, fetchAllproducts, cart, setCart ,
             }
         
 
-        let cartItem = {
-            ...product,
-            quantity: cartQuantity
-        }
+      
 
         ////cart increase quantity code
-        console.log("Product already in cart? ", cart.includes(product))
+        if (cart.some(e => e.id === product.id)) {
+            const newCart =  cart.map(item=> {
+                if(item.id === product.id){
+                    let newItem = item
+                    newItem.quantity = newItem.quantity + 1
+                    return newItem
+                }else {
+                    return item
+                }
+            })
+            setCart(newCart)
+            console.log("ID FOUND")
+            //setCartQuantity(cartQuantity + 1);
+        }else {
+            let cartItem = {
+                ...product,
+                quantity: 1
+            }
+            setCart([...cart, cartItem]);
+        }
+       // console.log("Product already in cart? ", cart.includes(product.id))
 
-        setCart([...cart, cartItem]);
+       
         localStorage.setItem('Cart', JSON.stringify(cart));
 
 
