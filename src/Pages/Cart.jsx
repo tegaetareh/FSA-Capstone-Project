@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom";
 
 export default function Cart({ token, cart, setCart }) {
+
     const navigate = useNavigate();
 
     function navigateToProduct() {
@@ -44,7 +45,8 @@ export default function Cart({ token, cart, setCart }) {
                             </div>
                         ))}
                     </ul>
-                    <p>Total = {cart.reduce((acc, item) => acc + (item.price*item.quantity), 0)}</p>
+                    <p>Total = ${(cart.reduce((acc, item) => acc + (item.price*item.quantity), 0)).toFixed(2)} <br />
+                    </p>
                     <p><button>Checkout</button></p>
                     {/* TODO: Checkout functionality, stripe or download pdf/file of order details */}
                     {/* todo: if no item in cart show message not total */}
