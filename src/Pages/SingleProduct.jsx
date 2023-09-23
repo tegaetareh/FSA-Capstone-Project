@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { fetchProductById } from "../API/APIFunctions";
-export default function SingleProduct() {
+import AddToCart from "../components/addToCart";
+export default function SingleProduct({cart, setCart}) {
     const {id} = useParams();
     const [product, setProduct] = useState(null)
     useEffect(() => {
@@ -28,7 +29,8 @@ export default function SingleProduct() {
                 <p>${price}</p>
                 <img src={image} alt={title} />
                 <Link to='/'><button>Back to All Products</button></Link>
-                <button>Add to Cart</button>
+                {/* <button>Add to Cart</button> */}
+                <AddToCart product={product} cart={cart} setCart={setCart} />
             </div>
       )
      
