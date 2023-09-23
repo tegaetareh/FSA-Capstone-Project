@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import AddToCart from "./addToCart";
 import { Link, useNavigate } from "react-router-dom";
-export default function ProductCard({ product, fetchAllproducts, cart, setCart , token}) {
+import { Rating } from "react-simple-star-rating";
+export default function ProductCard({ product, fetchAllproducts, cart, setCart, token }) {
     const { id, title, description, image, price } = product;
     const navigate = useNavigate();
     // console.log(id, title, price)
@@ -12,9 +13,9 @@ export default function ProductCard({ product, fetchAllproducts, cart, setCart ,
         navigate(`/products/${id}`)
 
     }
-  
+
     // function addToCart(product) {
-        
+
     //         //console.log("token is", localStorage.getItem('Token'))
     //         if (!localStorage.getItem('Token')){
     //             console.log("no token here")
@@ -23,9 +24,9 @@ export default function ProductCard({ product, fetchAllproducts, cart, setCart ,
     //         }else {
     //             console.log("token is", localStorage.getItem('Token'))
     //         }
-        
 
-      
+
+
 
     //     ////cart increase quantity code
     //     if (cart.some(e => e.id === product.id)) {
@@ -50,12 +51,12 @@ export default function ProductCard({ product, fetchAllproducts, cart, setCart ,
     //     }
     //    // console.log("Product already in cart? ", cart.includes(product.id))
 
-       
+
     //     localStorage.setItem('Cart', JSON.stringify(cart));
 
 
     // }
-    
+
 
 
     return (
@@ -65,6 +66,12 @@ export default function ProductCard({ product, fetchAllproducts, cart, setCart ,
             {/* <p>{description}</p> */}
 
             <img src={product.image} alt={product.title} onClick={() => goToLinkID(id)} />
+            <Rating
+                allowFraction
+                initialValue={product.rating.rate}
+                onClick={function noRefCheck() { }}
+                readonly
+            />
             <h3>${product.price}</h3>
             <div>
                 <Link className="linkButton" to={`/products/${product.id}`}><button>View Product</button></Link>
