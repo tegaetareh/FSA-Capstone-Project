@@ -45,38 +45,39 @@ export default function Products({ token, cart, setCart }) {
     }
     function selectSortBy(e) {
         setSortBy(e.target.value);
-      }
-    
-      function sortByPrice(ascending) {
+    }
+
+    function sortByPrice(ascending) {
         filteredProducts.sort((a, b) => {
-          if (!ascending) {
-            return b.price - a.price
-          }
-          return a.price - b.price
+            if (!ascending) {
+                return b.price - a.price
+            }
+            return a.price - b.price
         })
-      }
-      if(sortBy === 'price') {
+    }
+    if (sortBy === 'price') {
         sortByPrice();
-      } else if (sortBy === 'rating') {
+    } else if (sortBy === 'rating') {
         filteredProducts.sort((a, b) => b.rating.rate - a.rating.rate);
-      }
-      
-      let finalRender =filteredProducts.filter(product => product.price <= priceRange);
-      console.log(priceRange)
+    }
+
+    let finalRender = filteredProducts.filter(product => product.price <= priceRange);
+    console.log(priceRange)
 
 
 
     return (
 
-        < div className="allProducts">
 
+
+        < div className="allProducts">
             <div className="ssf">
                 {/* ssf is search sort and filter */}
 
                 <form onSubmit={handleSearch}>
                     <b>Search: </b><input className="searchbar" onChange={handleSearch} type="text" id="search" />
                 </form >
-                <form ><b>Filter: </b>
+                <form >
                     <input value="electronics" type="radio" name="category" id="eletronics" onChange={handleCategory} /><label>Eletronics</label>
                     <input value="jewelery" type="radio" name="category" id="jewelery" onChange={handleCategory} /><label>Jewelery</label>
                     <input value="men's clothing" type="radio" name="category" id="men's clothing" onChange={handleCategory} /><label>Mens Clothing</label>
@@ -84,7 +85,7 @@ export default function Products({ token, cart, setCart }) {
                     <input value="all" type="radio" name="category" id="all" onChange={handleCategory} /><label>All</label>
 
                 </form>
-                Min Price<input type="range" min="20" max="1000" value={priceRange} onChange={(e) => setPriceRange(e.target.value)}/>Max Price
+                Min Price<input className="slider" type="range" min="20" max="1000" value={priceRange} onChange={(e) => setPriceRange(e.target.value)} />Max Price
                 <form><b>Sort: </b>
                     <select value={sortBy} onChange={selectSortBy}>
                         <option value="price">Price</option>
@@ -92,6 +93,7 @@ export default function Products({ token, cart, setCart }) {
                     </select>
                 </form>
             </div>
+
 
             <main >
                 {filteredByCategory ?
@@ -105,7 +107,7 @@ export default function Products({ token, cart, setCart }) {
                             fetchAllproducts={fetchData}
                             cart={cart}
                             setCart={setCart}
-                            token = {token}
+                            token={token}
                         />
                     ))
 
@@ -119,7 +121,7 @@ export default function Products({ token, cart, setCart }) {
                             fetchAllproducts={fetchData}
                             cart={cart}
                             setCart={setCart}
-                            token ={token}
+                            token={token}
                         />
                     ))
 
@@ -127,6 +129,9 @@ export default function Products({ token, cart, setCart }) {
             </main>
 
         </div>
+
+
+
 
 
     )

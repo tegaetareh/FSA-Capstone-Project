@@ -80,22 +80,27 @@ export default function Login({ token, setToken }) {
 
         <>
             <div className="login">
-                <h1 className="allProducts">Login</h1>
+                {/* <h1 className="allProducts">Login</h1> */}
 
-                <div>
+               
                     {/* {successMessage && <p className="success"> {successMessage}</p>} */}
                     {error && <p className='error'>{error}</p>}
                     <form onSubmit={handleSubmit}>
-                        <label>
+                        {/* <label>
                             Username:
-                        </label> <input value={username} onChange={(e) => setUsername(e.target.value)} />
-                        <label>
+                        </label> */}
+                        Username:
+                         <input value={username} onChange={(e) => setUsername(e.target.value)} /> <br />
+                        {/* <label> <br />
                             Password:
-                        </label><input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                        <button>Submit</button>
+                        </label> */}
+                        Password: 
+                        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} /> <br />
+                        
+                        <div className="loginFooter"><button className="btn">Submit</button> Forgot password?</div>
                     </form>
 
-                </div>
+                
             </div>
         </>
 

@@ -62,19 +62,26 @@ export default function ProductCard({ product, fetchAllproducts, cart, setCart, 
     return (
         // style title image price and product in different section so layout is more uniform
         <div key={product.id} className="productCard" >
-            <h3>{product.title}</h3>
+            <div className="pcHeading">
+               <h3>{product.title}</h3> 
+            </div>
+            
             {/* <p>{description}</p> */}
-
-            <img src={product.image} alt={product.title} onClick={() => goToLinkID(id)} />
-            <Rating
+            <div className="pcImage">
+               <img src={product.image} alt={product.title} onClick={() => goToLinkID(id)} />  
+            </div>
+            <div className="pcRating">
+                  <Rating className="rating"
                 allowFraction
                 initialValue={product.rating.rate}
                 onClick={function noRefCheck() { }}
                 readonly
             />
-            <h3>${product.price}</h3>
-            <div>
-                <Link className="linkButton" to={`/products/${product.id}`}><button>View Product</button></Link>
+            </div>
+          
+            <h3 className="pcPrice">${product.price}</h3>
+            <div className="buttons">
+                <Link className="linkButton" to={`/products/${product.id}`}><button className="btn">View Product</button></Link>
                 {/* <button className="productCardButton" onClick={() => addToCart(product)}>Add to cart</button> */}
                 <AddToCart product={product} cart={cart} setCart={setCart} />
 

@@ -56,7 +56,7 @@ export default function AddToCart({product, cart, setCart}) {
     return (
         <div className="btn_addToCart">
 
-            <button onClick={() => add2Cart()}>Add to Cart</button>
+            <button className="btn" onClick={() => add2Cart()}>Add to Cart</button>
         </div>
     )
 

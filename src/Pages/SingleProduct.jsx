@@ -29,18 +29,21 @@ export default function SingleProduct({ cart, setCart }) {
 
 
       <h2>{title}</h2>
-      <p>{description}</p>
-      <p>${price}</p>
-      <Rating
+      <p className="desc">{description}</p>
+      <p className="price">${price}</p>
+      <Rating className="rating"
         allowFraction
         initialValue={rating.rate}
         onClick={function noRefCheck() { }}
         readonly
-      />
+      /> ({rating.count} Reviews)
       <img src={image} alt={title} />
-      <Link to='/'><button>Back to All Products</button></Link>
-      {/* <button>Add to Cart</button> */}
-      <AddToCart product={product} cart={cart} setCart={setCart} />
+      <div className="buttons">
+        <Link to='/'><button className="btn">All Products</button></Link>
+        {/* <button>Add to Cart</button> */}
+        <AddToCart product={product} cart={cart} setCart={setCart} />
+      </div>
+
     </div>
   )
 

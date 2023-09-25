@@ -1,4 +1,6 @@
 import { Link, useNavigate } from "react-router-dom"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 
 export default function Navbar({ cart, setCart, token, setToken }) {
     const navigate = useNavigate();
@@ -21,6 +23,7 @@ export default function Navbar({ cart, setCart, token, setToken }) {
     return (
 
         <div className="navbar">
+            
             <h1 className="logo"> <a href="#" onClick={goToHome}>FakeStore</a></h1>
             {token ? <ul className="nav-links">
 
@@ -37,8 +40,10 @@ export default function Navbar({ cart, setCart, token, setToken }) {
                     <Link to="/products">Categories</Link>
                 </li>
                 <li>
-                    <Link to="/cart">Cart {(cart.length>0)&& cart.length} </Link>
-                    {/* todo: show cart length only if its > 0 */}
+                    {/* <Link to="/cart">Cart {(cart.length>0)&& cart.length} </Link> */}
+                    <Link to="/cart"> <FontAwesomeIcon icon={faCartShopping} size="lg" style={{color: "#ffffff",}} /><span className="badge" value={cart.length}>{cart.length}</span></Link>
+                    
+                  
                 </li>
             </ul> : <ul className="nav-links">
                 <li>
@@ -58,6 +63,7 @@ export default function Navbar({ cart, setCart, token, setToken }) {
 
 
             </ul>}
+           
         </div>
 
 

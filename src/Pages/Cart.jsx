@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom";
 
-export default function Cart({ token, cart, setCart }) {
 
+export default function Cart({ token, cart, setCart }) {
+    
     const navigate = useNavigate();
 
     function navigateToProduct() {
@@ -11,12 +12,20 @@ export default function Cart({ token, cart, setCart }) {
         navigate('/products');
 
     };
+    function handleQty(e, item) {
+        console.log(e.target.value)
+        console.log (item)
+     
+        
+
+
+    }
 
     function deleteItem(id) {
         setCart(cart.filter(item => item.id !== id));
         localStorage.setItem('Cart', JSON.stringify(cart));
         console.log("cart lenght", cart.length)
-        
+
     }
     console.log("cart :", cart)
 
@@ -27,27 +36,42 @@ export default function Cart({ token, cart, setCart }) {
 
     return (
 
- 
+
         <div>
             {token ?
                 <div className="cart">
-                    <h2>Your Items</h2>
+                    {/* <h2>Your Items</h2> */}
                     <ul>
                         {cart.map(item => (
                             <div className="cartItem" key={item.id}>
                                 <img src={item.image} alt={item.title} />
-                                <p>{item.title} </p>
+                                <div  className="cartContent"> 
+                                    
+                                <p className="cartTitle">{item.title} </p>
                                 <p>Price: ${item.price} </p>
                                 <p>Quantity: {item.quantity} </p>
-                                <button onClick={() => deleteItem(item.id)}>Remove from cart ❌</button><br /><br />
-                                <hr />
+                                {/* <form onSubmit={handleQty(item)}> */}
+                                <div className="quantity">
+                                    <button className="btn" onClick={() => deleteItem(item.id)}>Delete Item</button><br />
+                                    <button className="qtyButton">+</button>
+                                    <input type="text" maxLength="3" size="3" id="qtyText" defaultValue={item.quantity} onChange={(e)=>handleQty(e, item)}/>
+                                    <button className="qtyButton"> - </button>
+                                </div>
+                                    
+                                </div>
+                                
+                                {/* </form> */}
 
                             </div>
                         ))}
                     </ul>
-                    <p>Total = ${(cart.reduce((acc, item) => acc + (item.price*item.quantity), 0)).toFixed(2)} <br />
+                    <p className="total">Total = ${(cart.reduce((acc, item) => acc + (item.price * item.quantity), 0)).toFixed(2)} <br />
                     </p>
-                    <p><button>Checkout</button></p>
+                    <div className="cartBuyButtons">
+                       <button className="btn">Clear Cart</button>
+                    <button className="btn">Checkout</button> 
+                    </div>
+                    
                     {/* TODO: Checkout functionality, stripe or download pdf/file of order details */}
                     {/* todo: if no item in cart show message not total */}
 
