@@ -76,40 +76,49 @@ export async function loginFunction(username, password, setError) {
 
   } catch (error) {
     console.log(error.message)
-    setError("Invalid username or password");
+    setError("⚠️ Invalid username or password");
 
   }
 }
 
 //Add new user
-export async function addNewUser() {
-  fetch('https://fakestoreapi.com/users', {
-    method: "POST",
-    body: JSON.stringify(
-      {
-        email: 'John@gmail.com',
-        username: 'johnd',
-        password: 'm38rmF$',
-        name: {
-          firstname: 'John',
-          lastname: 'Doe'
-        },
-        address: {
-          city: 'kilcoole',
-          street: '7835 new road',
-          number: 3,
-          zipcode: '12926-3874',
-          geolocation: {
-            lat: '-37.3159',
-            long: '81.1496'
-          }
-        },
-        phone: '1-570-236-7033'
-      }
-    )
-  })
-    .then(res => res.json())
-    .then(json => console.log(json))
+export async function addNewUser(username, password, firstname, lastname, email, setError) {
+
+  try {
+    const response = await fetch('https://fakestoreapi.com/users', {
+      method: "POST",
+      body: JSON.stringify(
+        {
+          email: email,
+          username: username,
+          password: password,
+          name: {
+            firstname: firstname,
+            lastname: lastname
+          },
+          address: {
+            city: 'kilcoole',
+            street: '7835 new road',
+            number: 3,
+            zipcode: '12926-3874',
+            geolocation: {
+              lat: '-37.3159',
+              long: '81.1496'
+            }
+          },
+          phone: '1-570-236-7033'
+        }
+      )
+    })
+    const result = await response.json();
+    console.log ("result from register: ", result);
+    return result
+
+  }catch (error) {
+    setError (error);
+
+  }
+
 
 
 }

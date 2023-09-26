@@ -1,9 +1,13 @@
 import { useState, useEffect } from "react"
 import { useNavigate, Link } from "react-router-dom";
-import { loginFunction } from "../API/APIFunctions";
+import { addNewUser } from "../API/APIFunctions";
 export default function Register({ token }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [cPassword, setCPassword] = useState("");
+    const [email, setEmail] = useState("");
+    const [firstname, setFirstname] = useState("");
+    const [lastname, setLastname] = useState("");
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 
@@ -14,14 +18,36 @@ export default function Register({ token }) {
         navigate('/login');
 
     };
+
+    useEffect(() => {
+        if (token) {
+            navigateToLogin()
+        }
+    }, [token]);
+
+
     async function handleSubmit(event) {
         event.preventDefault();
-        const result = await loginFunction(username, password, setError)
-        console.log("result is", result)
+        if (password.length < 5) {
+            setUsername('')
+            setPassword('')
+            return (setError("⚠️ Password must be more than 5 characters"))
+        }
+        if (password != cPassword) {
+            return (setError("⚠️ Passwords do not match"))
+        }
 
+
+        const result = await addNewUser(username, password, firstname, lastname, email, setError)
+        console.log("result is", result)
+        
 
         setUsername('')
         setPassword('')
+        setEmail('')
+        setFirstname('')
+        setLastname('')
+    
         if (result) { navigateToLogin(); }
 
 
@@ -42,17 +68,24 @@ export default function Register({ token }) {
 
                 {/* {successMessage && <p className="success"> {successMessage}</p>} */}
                 {error && <p className='error'>{error}</p>}
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} id="registerForm">
                     <table>
-                        
-                        <tbody>
 
+                        <tbody>
+                            <tr>
+                                <td>
+                                    Email:
+                                </td>
+                                <td>
+                                    <input id="email" value={email} onChange={(e) => setEmail(e.target.value)} required/> <br />
+                                </td>
+                            </tr>
                             <tr>
                                 <td>
                                     Firstname:
                                 </td>
                                 <td>
-                                    <input value={username} onChange={(e) => setUsername(e.target.value)} /> <br />
+                                    <input id="firstname" value={firstname} onChange={(e) => setFirstname(e.target.value)} required /> <br />
                                 </td>
                             </tr>
                             <tr>
@@ -60,7 +93,7 @@ export default function Register({ token }) {
                                     Lastname:
                                 </td>
                                 <td>
-                                    <input value={username} onChange={(e) => setUsername(e.target.value)} /> <br />
+                                    <input id="lastname" value={lastname} onChange={(e) => setLastname(e.target.value)} required /> <br />
                                 </td>
                             </tr>
                             <tr>
@@ -68,7 +101,7 @@ export default function Register({ token }) {
                                     Username:
                                 </td>
                                 <td>
-                                    <input value={username} onChange={(e) => setUsername(e.target.value)} /> <br />
+                                    <input id="username" value={username} onChange={(e) => setUsername(e.target.value)} required/> <br />
                                 </td>
                             </tr>
                             <tr>
@@ -76,7 +109,7 @@ export default function Register({ token }) {
                                     Password:
                                 </td>
                                 <td>
-                                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} /> <br />
+                                    <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required /> <br />
                                 </td>
                             </tr>
                             <tr>
@@ -84,7 +117,7 @@ export default function Register({ token }) {
                                     Confirm Password:
                                 </td>
                                 <td>
-                                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} /> <br />
+                                    <input type="password" id="cPassword" value={cPassword} onChange={(e) => setCPassword(e.target.value)} required /> <br />
                                 </td>
                             </tr>
                         </tbody>
