@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link} from "react-router-dom";
 import { loginFunction } from "../API/APIFunctions";
 export default function Login({ token, setToken }) {
     const [username, setUsername] = useState("");
@@ -97,7 +97,10 @@ export default function Login({ token, setToken }) {
                         Password: 
                         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} /> <br />
                         
-                        <div className="loginFooter"><button className="btn">Submit</button> Forgot password?</div>
+                        <div className="loginFooter"><button className="btn">Submit</button> Forgot password?
+                       
+                        </div>
+                        <br /><br /> <p>Not a member? Register <Link className="link" to={`../register`}>here</Link> </p>
                     </form>
 
                 

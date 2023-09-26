@@ -7,6 +7,7 @@ import Login from "./Pages/Login"
 import Navbar from "./components/Navbar"
 import Footer from "./components/footer"
 import Cart from "./Pages/Cart"
+import Register from "./Pages/register"
 function App() {
   const [token, setToken] = useState(localStorage.getItem('Token'))
   // const [cart, setCart] = useState([]);
@@ -26,6 +27,7 @@ function App() {
         <Route path="/" element={<Products cart={cart} setCart={setCart}  />} />
         <Route path="/products" element={<Products cart={cart} setCart={setCart}  />} />
         <Route path="/login" element={<Login token={token} setToken={setToken}/>} />
+        <Route path="/register" element={<Register token={token} />} />
         <Route path='/products/:id' element={<SingleProduct cart={cart} setCart={setCart}  />} />
         <Route path="/cart" element={<Cart token={token} cart={cart} setCart={setCart}/>} />
       </Routes>

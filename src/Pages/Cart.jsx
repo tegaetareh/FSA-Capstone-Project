@@ -15,6 +15,7 @@ export default function Cart({ token, cart, setCart }) {
     function handleQty(e, item) {
         console.log(e.target.value)
         console.log (item)
+        item.quantity = parseInt(e.target.value)
      
         
 

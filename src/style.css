@@ -89,8 +89,13 @@ ul {
     border: 1px solid #256D85;
     border-radius: 10px;
     text-align: center;
-    padding: 50px;
+    padding: 70px;
     box-shadow: 0 0 10px 0 #256D85; 
+}
+
+.login .link {
+    color: #256d85;
+    text-decoration: underline;
 }
 
 .login input {
@@ -106,6 +111,10 @@ ul {
     align-content: center;
     align-items: center;
     margin-top: 15px;
+}
+.registerFooter {
+    text-align: center;
+    margin: 20px;;
 }
 
 
