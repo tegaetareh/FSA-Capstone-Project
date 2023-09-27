@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar"
 import Footer from "./components/footer"
 import Cart from "./Pages/Cart"
 import Register from "./Pages/register"
+import Checkout from "./Pages/Checkout"
 function App() {
   const [token, setToken] = useState(localStorage.getItem('Token'))
   // const [cart, setCart] = useState([]);
@@ -30,6 +31,7 @@ function App() {
         <Route path="/register" element={<Register token={token} />} />
         <Route path='/products/:id' element={<SingleProduct cart={cart} setCart={setCart}  />} />
         <Route path="/cart" element={<Cart token={token} cart={cart} setCart={setCart}/>} />
+        <Route path="/checkout" element={<Checkout token={token} cart={cart} setCart={setCart}/>} />
       </Routes>
       <Footer />
     </>

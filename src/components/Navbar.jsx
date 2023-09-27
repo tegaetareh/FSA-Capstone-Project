@@ -51,7 +51,7 @@ export default function Navbar({ cart, setCart, token, setToken }) {
                 </li>
                 <li>
                     {/* <Link to="/cart">Cart {(cart.length>0)&& cart.length} </Link> */}
-                    <Link to="/cart"> <FontAwesomeIcon icon={faCartShopping} size="lg" style={{ color: "#ffffff", }} /><span className="badge" value={cart.length}>{cart.length}</span></Link>
+                    <Link to="/cart"> <FontAwesomeIcon icon={faCartShopping} size="lg" style={{ color: "#ffffff", }} /><span className="badge" value={cart.length}>{(cart.length>0)&&cart.length}</span></Link>
 
 
                 </li>

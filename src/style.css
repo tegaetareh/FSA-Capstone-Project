@@ -336,6 +336,26 @@ input[type="range"]::-webkit-slider-runnable-track {
     margin:20px
 }
 
+.purchase {
+    text-align: center;
+    font-size: 3em;
+    color: #256D85
+
+}
+
+.logo {
+    color :#256D85
+}
+.cartBuyButtons {
+    text-align: center;
+}
+
+.cartBuyButtons .btn {
+   
+    width:200px;
+    padding: 15px;
+    
+}
 
 
 .badge:after{
@@ -350,3 +370,4 @@ input[type="range"]::-webkit-slider-runnable-track {
     top:-10px;
     opacity:0.9;
 }
+
