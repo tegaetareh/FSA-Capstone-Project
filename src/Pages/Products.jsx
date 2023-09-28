@@ -73,11 +73,14 @@ export default function Products({ token, cart, setCart }) {
         < div className="allProducts">
             <div className="ssf">
                 {/* ssf is search sort and filter */}
-
-                <form onSubmit={handleSearch}>
+                <div className="search">
+                    <form onSubmit={handleSearch} className="search">
                     <b>Search: </b><input className="searchbar" onChange={handleSearch} type="text" id="search" />
                 </form >
-                <form >
+                </div>
+                
+                <div className="filter">
+                    <form >
                     <input value="electronics" type="radio" name="category" id="eletronics" onChange={handleCategory} /><label>Eletronics</label>
                     <input value="jewelery" type="radio" name="category" id="jewelery" onChange={handleCategory} /><label>Jewelery</label>
                     <input value="men's clothing" type="radio" name="category" id="men's clothing" onChange={handleCategory} /><label>Mens Clothing</label>
@@ -85,9 +88,11 @@ export default function Products({ token, cart, setCart }) {
                     <input value="all" type="radio" name="category" id="all" onChange={handleCategory} /><label>All</label>
 
                 </form>
+                </div>
+                
                 Min Price<input className="slider" type="range" min="20" max="1000" value={priceRange} onChange={(e) => setPriceRange(e.target.value)} />Max Price
                 <form><b>Sort: </b>
-                    <select value={sortBy} onChange={selectSortBy}>
+                    <select value={sortBy} onChange={selectSortBy} className="sort">
                         <option value="price">Price</option>
                         <option value="rating">Rating</option>
                     </select>

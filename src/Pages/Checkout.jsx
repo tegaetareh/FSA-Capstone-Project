@@ -32,7 +32,7 @@ export default function Checkout({ token, cart, setCart}) {
             {token ?
                 <div className="cart">
                     <h2 className="purchase">Purchased Successful!</h2>
-                    <h3 >Purchased Items</h3>
+                    {/* <h3 className="pItems">Purchased Items</h3> */}
                     <ul>
                         {cart.map(item => (
                             <div className="cartItem" key={item.id}>
@@ -53,7 +53,7 @@ export default function Checkout({ token, cart, setCart}) {
 
                     <p className="total"> Total = ${(cart.reduce((acc, item) => acc + (item.price * item.quantity), 0)).toFixed(2)}<br />
                     </p>
-                    <div className="cartBuyButtons">
+                    <div className="checkoutBuyButtons">
                         <button className="btn" onClick={handleCheckout}>Continue Shopping</button>
                     </div>
 

@@ -40,7 +40,11 @@ ul {
     width: 300px;
     /* height: 300px; */
 }
-
+.searchbar {
+    border: 1px solid #256D85;
+    height: 20px;
+    /* width:200px */
+}
 .navbar {
     position: fixed;
     top: 0;
@@ -171,6 +175,13 @@ ul {
 .rating {
     z-index: -1;
 }
+
+/* .search, .filter {
+    border-right: solid 1px #256D85;
+   
+    padding-right: 15px;
+} */
+
 /* CSS FOR SLIDER */
 /* .slider {
     -webkit-appearance: none;
@@ -339,14 +350,18 @@ input[type="range"]::-webkit-slider-runnable-track {
 .purchase {
     text-align: center;
     font-size: 3em;
-    color: #256D85
+    color: #256D85;
+    margin-top:5px;
+    border-bottom: 1px solid #256D85;
+    margin-bottom: 15px;
+    
 
 }
 
 .logo {
     color :#256D85
 }
-.cartBuyButtons {
+/* .cartBuyButtons {
     text-align: center;
 }
 
@@ -355,6 +370,23 @@ input[type="range"]::-webkit-slider-runnable-track {
     width:200px;
     padding: 15px;
     
+} */
+.checkoutBuyButtons {
+    text-align: center;
+}
+
+.checkoutBuyButtons .btn {
+   
+    width:200px;
+    padding: 15px;
+    
+}
+
+.pItems {
+    font-size: 1.5em;
+    color:#256d85;
+    margin-bottom: 20px;
+    margin-top:20px;
 }
 
 

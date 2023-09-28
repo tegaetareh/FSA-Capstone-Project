@@ -1,12 +1,44 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom";
-
+import * as React from 'react';
+import Checkout from "./Checkout";
+//dialog code
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+//dialog code
 
 export default function Cart({ token, cart, setCart }) {
     const [total, setTotal] = useState(0)
     const [addQty, setAddQty] = useState(0);
     const [reduceQty, setReduceQty] = useState(0);
+    //  dialog react code
+    const [open, setOpen] = React.useState(false);
+    const [scroll, setScroll] = React.useState('paper');
 
+    const handleClickOpen = (scrollType) => () => {
+        setOpen(true);
+        setScroll(scrollType);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const descriptionElementRef = React.useRef(null);
+    React.useEffect(() => {
+        if (open) {
+            const { current: descriptionElement } = descriptionElementRef;
+            if (descriptionElement !== null) {
+                descriptionElement.focus();
+            }
+        }
+    }, [open]);
+
+    //   end of dialog react code
     const navigate = useNavigate();
 
 
@@ -19,7 +51,7 @@ export default function Cart({ token, cart, setCart }) {
 
     function navigateToCheckout() {
         // 👇️ navigate to /
-        
+
         navigate('/checkout');
 
     };
@@ -56,8 +88,8 @@ export default function Cart({ token, cart, setCart }) {
                 }
             })
             setCart(newCart)
-        
-            
+
+
         } else {
             let cartItem = {
                 ...product,
@@ -72,7 +104,7 @@ export default function Cart({ token, cart, setCart }) {
     }
 
     function handleAdd(item) {
-        let addQty = parseInt(item.quantity) +1;
+        let addQty = parseInt(item.quantity) + 1;
         console.log(addQty)
         setAddQty(addQty)
 
@@ -98,7 +130,7 @@ export default function Cart({ token, cart, setCart }) {
     useEffect(() => {
         if (!cart.length) navigateToProduct()
     }, [cart]);
-    
+
 
     // setTotal((cart.reduce((acc, item) => acc + (item.price * item.quantity), 0)).toFixed(2))
 
@@ -143,11 +175,45 @@ export default function Cart({ token, cart, setCart }) {
                     </p>
                     <div className="cartBuyButtons">
                         <button className="btn" onClick={() => clearCart()}  >Clear Cart</button>
-                        <button className="btn" onClick={navigateToCheckout} >Checkout</button>
+                        {/* <button className="btn" onClick={navigateToCheckout} >Checkout</button> */}
+                        <button className="btn" onClick={handleClickOpen('paper')} >Checkout</button>
                     </div>
 
                     {/* TODO: Checkout functionality, stripe or download pdf/file of order details */}
                     {/* todo: if no item in cart show message not total */}
+                    <div>
+                        <Dialog
+                            open={open}
+                            onClose={handleClose}
+                            scroll={scroll}
+                            aria-labelledby="scroll-dialog-title"
+                            aria-describedby="scroll-dialog-description"
+                        >
+                            {/* <DialogTitle id="scroll-dialog-title">Checkout</DialogTitle> */}
+                            <DialogContent dividers={scroll === 'paper'}>
+                                <DialogContentText
+                                    id="scroll-dialog-description"
+                                    ref={descriptionElementRef}
+                                    tabIndex={-1}
+                                >
+                                    {/* {[...new Array(50)]
+                                        .map(
+                                            () => `Cras mattis consectetur purus sit amet fermentum.
+Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
+                                        )
+                                        .join('\n')} */}
+                                        <Checkout token={token} cart={cart} setCart={setCart} />
+                                </DialogContentText>
+                            </DialogContent>
+                            {/* <DialogActions>
+                                <Button onClick={handleClose}>Cancel</Button>
+                                <Button onClick={handleClose}>Subscribe</Button>
+                            </DialogActions> */}
+                        </Dialog>
+
+                    </div>
 
                 </div> :
                 <div className="cart" >
