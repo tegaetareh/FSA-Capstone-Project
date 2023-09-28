@@ -83,7 +83,7 @@ export default function ProductCard({ product, fetchAllproducts, cart, setCart, 
             <div className="buttons">
                 <Link className="linkButton" to={`/products/${product.id}`}><button className="btn">View Product</button></Link>
                 {/* <button className="productCardButton" onClick={() => addToCart(product)}>Add to cart</button> */}
-                <AddToCart product={product} cart={cart} setCart={setCart} />
+                <AddToCart product={product} cart={cart} setCart={setCart} token={token} />
 
             </div>
             {/* TODO: add back to all products button and add to cart button  underneath picture*/}

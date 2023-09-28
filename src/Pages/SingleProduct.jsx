@@ -41,7 +41,7 @@ export default function SingleProduct({ cart, setCart }) {
       <div className="buttons">
         <Link to='/'><button className="btn">All Products</button></Link>
         {/* <button>Add to Cart</button> */}
-        <AddToCart product={product} cart={cart} setCart={setCart} />
+        <AddToCart product={product} cart={cart} setCart={setCart}  />
       </div>
 
     </div>
