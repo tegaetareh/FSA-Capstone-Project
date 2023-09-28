@@ -172,6 +172,10 @@ ul {
 .buttons {
     display: flex;
 }
+
+.error {
+    color: red;
+}
 .rating {
     z-index: -1;
 }

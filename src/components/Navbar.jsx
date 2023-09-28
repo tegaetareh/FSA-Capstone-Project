@@ -2,6 +2,13 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
+//mui badge code
+import * as React from 'react';
+import Badge from '@mui/material/Badge';
+import { styled } from '@mui/material/styles';
+import IconButton from '@mui/material/IconButton';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+//end of badge code
 
 export default function Navbar({ cart, setCart, token, setToken }) {
     const [navDisplay, setNavDisplay] = useState(false)
@@ -17,7 +24,7 @@ export default function Navbar({ cart, setCart, token, setToken }) {
         if (token === "undefined") {
             console.log("I have no tokennnnn")
             setToken(null)
-        } 
+        }
     }, [token]);
     console.log(navDisplay)
     function handleLogout() {
@@ -51,8 +58,12 @@ export default function Navbar({ cart, setCart, token, setToken }) {
                 </li>
                 <li>
                     {/* <Link to="/cart">Cart {(cart.length>0)&& cart.length} </Link> */}
-                    <Link to="/cart"> <FontAwesomeIcon icon={faCartShopping} size="lg" style={{ color: "#ffffff", }} /><span className="badge" value={cart.length}>{(cart.length>0)&&cart.length}</span></Link>
-
+                    {/* <Link to="/cart"> <FontAwesomeIcon icon={faCartShopping} size="lg" style={{ color: "#ffffff", }} /><span className="badge" value={cart.length}>{(cart.length > 0) && cart.length}</span></Link> */}
+                    <Link to="/cart">
+                        <Badge badgeContent={cart.length} color="primary">
+                            <ShoppingCartIcon color="white" sx={{fontSize:35}} />
+                        </Badge>
+                    </Link>
 
                 </li>
             </ul> : <ul className="nav-links">

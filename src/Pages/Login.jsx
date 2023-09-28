@@ -62,7 +62,7 @@ export default function Login({ token, setToken }) {
                     <div className="loginFooter"><button className="btn">Submit</button> Forgot password?
 
                     </div>
-                    <br /><br /> <p>Not a member? Register <Link className="link" to={`../register`}>here</Link> </p>
+                    <br /><br /> <p>Don't have an account? Register <Link className="link" to={`../register`}>here</Link> </p>
                 </form>
 
 

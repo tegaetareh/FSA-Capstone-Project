@@ -1,6 +1,20 @@
 import { useState, useEffect } from "react"
 import { useNavigate, Link } from "react-router-dom";
 import { addNewUser } from "../API/APIFunctions";
+
+//mui snackbar 
+import * as React from 'react';
+import Button from '@mui/material/Button';
+import Snackbar from '@mui/material/Snackbar';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import MuiAlert from '@mui/material/Alert';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+// end of mui snackbar
+
 export default function Register({ token }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -9,8 +23,36 @@ export default function Register({ token }) {
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
     const [error, setError] = useState(null);
+    const [open, setOpen] = React.useState(false); //for mui snackbar
     const navigate = useNavigate();
+//mui functions
+const handleClick = () => {
+    setOpen(true);
+};
 
+const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+        return;
+    }
+
+    setOpen(false);
+};
+const action = (
+    <React.Fragment>
+        <Button color="secondary" size="small" onClick={handleClose}>
+            UNDO
+        </Button>
+        <IconButton
+            size="small"
+            aria-label="close"
+            color="inherit"
+            onClick={handleClose}
+        >
+            <CloseIcon fontSize="small" />
+        </IconButton>
+    </React.Fragment>
+);
+//end of mui functions
 
     function navigateToLogin() {
         // 👇️ navigate to /
@@ -136,12 +178,23 @@ export default function Register({ token }) {
                     <p>Confirm Password:
                         <input value={username} onChange={(e) => setUsername(e.target.value)} /> <br /></p> */}
 
-                    <div className="registerFooter"><button className="btn">Submit</button>
+                    <div className="registerFooter"><button className="btn" >Submit</button>
 
                     </div>
                     Already a member? Login <Link className="link" to={`../login`}>here</Link>
+                    <Snackbar
+                // sx={{ height: "100%" }} this makes it appear in the middle of the page
+                anchorOrigin={{
+                   vertical: "top",
+                   horizontal: "center"
+                }}
+                open={open}
+                autoHideDuration={3000}
+                onClose={handleClose}
+            > <Alert severity="info">Registration Successful</Alert></Snackbar>
 
                 </form>
+              
 
 
             </div>
