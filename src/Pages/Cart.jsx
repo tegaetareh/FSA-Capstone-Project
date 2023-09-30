@@ -95,9 +95,9 @@ export default function Cart({ token, cart, setCart }) {
 
     }
 
-    function handleAdd(item) {
+    function handleAdd(targetItem) {
         setCart((prevCart) => {
-            return prevCart.map((targetItem) => {
+            return prevCart.map((item) => {
                 return item.id === targetItem.id
                     ? {
                         ...item,
@@ -111,9 +111,9 @@ export default function Cart({ token, cart, setCart }) {
 
 
     }
-    function handleMinus(item) {
+    function handleMinus(targetItem) {
         setCart((prevCart) => {
-            return prevCart.map((targetItem) => {
+            return prevCart.map((item) => {
                 return item.id === targetItem.id
                     ? {
                         ...item,
