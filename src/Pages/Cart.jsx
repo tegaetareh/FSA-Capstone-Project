@@ -58,24 +58,16 @@ export default function Cart({ token, cart, setCart }) {
     // console.log(document.getElementById("qtyText").value)
 
     function handleQty(event, item) {
-
-        if (isNaN(item.quantity)) {
-            setTotal(0)
+        event.target.value = Math.max(1, Math.min(20, parseInt(event.target.value)))
+        console.log("item in handleqty", item.quantity)
+        console.log ("input value", event.target.value)
+        console.log("isnan", isNaN(event.target.value))
+        if (event.target.value==="") {
+            event.target.value = 1 //sets input value to   1 if form is empty
         }
         console.log(event.target.value)
         console.log(item)
-        // item.quantity = parseInt(e.target.value)
-        // setCart([...cart, item.quantity])
-        // const newCart = cart.map(cartItem => {
-        //     if (cartItem.id === item.id) {
-        //         let newItem = item
-        //         newItem.quantity = parseInt(e.target.value)
-        //         return newItem
-        //     } else {
-        //         return item
-        //     }
-        // })
-        // setCart(newCart)
+
 
         if (cart.some(e => e.id === item.id)) {
             const newCart = cart.map(cartItem => {
@@ -104,11 +96,33 @@ export default function Cart({ token, cart, setCart }) {
     }
 
     function handleAdd(item) {
-        let addQty = parseInt(item.quantity) + 1;
-        console.log(addQty)
-        setAddQty(addQty)
+        setCart((prevCart) => {
+            return prevCart.map((targetItem) => {
+                return item.id === targetItem.id
+                    ? {
+                        ...item,
+                        // quantity: item.quantity ? item.quantity + 1 : 1,
+                        quantity: 
+                        item.quantity <=19 ? item.quantity + 1 : 20,
+                    }
+                    : item;
+            });
+        });
 
 
+    }
+    function handleMinus(item) {
+        setCart((prevCart) => {
+            return prevCart.map((targetItem) => {
+                return item.id === targetItem.id
+                    ? {
+                        ...item,
+                        quantity: 
+                        item.quantity && item.quantity > 1 ? item.quantity - 1 : 1,
+                    }
+                    : item;
+            });
+        });
     }
 
     function clearCart() {
@@ -158,9 +172,9 @@ export default function Cart({ token, cart, setCart }) {
                                     {/* <form onSubmit={handleQty(item)}> */}
                                     <div className="quantity">
                                         <button className="btn" onClick={() => deleteItem(item.id)}>Delete Item</button><br />
-                                        {/* <button className="qtyButton"  id="plus" onClick={() => handleAdd(item) }>+</button> */}
-                                        <b>Quantity:</b><input type="text" maxLength="5" size="5" id="qtyText" value={item.quantity} onChange={(event) => handleQty(event, item)} />
-                                        {/* <button className="qtyButton" id="minus"> - </button> */}
+                                        <button className="qtyButton" id="plus" onClick={() => handleAdd(item)}>+</button>
+                                        <input type="number" maxLength="5" size="5" id="qtyText" value={item.quantity} onChange={(event) => handleQty(event, item)} />
+                                        <button className="qtyButton" id="minus" onClick={() => { handleMinus(item) }}> - </button>
                                     </div>
 
                                 </div>
@@ -182,6 +196,7 @@ export default function Cart({ token, cart, setCart }) {
                     {/* TODO: Checkout functionality, stripe or download pdf/file of order details */}
                     {/* todo: if no item in cart show message not total */}
                     <div>
+{/* ====================================MUI CART RENDER CODE================================ */}
                         <Dialog
                             open={open}
                             onClose={handleClose}
@@ -196,15 +211,8 @@ export default function Cart({ token, cart, setCart }) {
                                     ref={descriptionElementRef}
                                     tabIndex={-1}
                                 >
-                                    {/* {[...new Array(50)]
-                                        .map(
-                                            () => `Cras mattis consectetur purus sit amet fermentum.
-Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
-                                        )
-                                        .join('\n')} */}
-                                        <Checkout token={token} cart={cart} setCart={setCart} />
+                                   
+                                    <Checkout token={token} cart={cart} setCart={setCart} />
                                 </DialogContentText>
                             </DialogContent>
                             {/* <DialogActions>
@@ -212,7 +220,7 @@ Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
                                 <Button onClick={handleClose}>Subscribe</Button>
                             </DialogActions> */}
                         </Dialog>
-
+{/* =====================================END OF MUI RENDER CODE=================================================== */}
                     </div>
 
                 </div> :
