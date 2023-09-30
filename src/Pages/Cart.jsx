@@ -104,11 +104,31 @@ export default function Cart({ token, cart, setCart }) {
     }
 
     function handleAdd(item) {
-        let addQty = parseInt(item.quantity) + 1;
-        console.log(addQty)
-        setAddQty(addQty)
+        setCart((prevCart) => {
+            return prevCart.map((targetItem) => {
+                return item.id === targetItem.id
+                    ? {
+                        ...item,
+                        quantity: item.quantity ? item.quantity + 1 : 1,
+                    }
+                    : item;
+            });
+        });
 
 
+    }
+    function handleMinus(item) {
+        setCart((prevCart) => {
+            return prevCart.map((targetItem) => {
+                return item.id === targetItem.id
+                    ? {
+                        ...item,
+                        quantity: 
+                        item.quantity && item.quantity > 1 ? item.quantity - 1 : 1,
+                    }
+                    : item;
+            });
+        });
     }
 
     function clearCart() {
@@ -158,9 +178,9 @@ export default function Cart({ token, cart, setCart }) {
                                     {/* <form onSubmit={handleQty(item)}> */}
                                     <div className="quantity">
                                         <button className="btn" onClick={() => deleteItem(item.id)}>Delete Item</button><br />
-                                        {/* <button className="qtyButton"  id="plus" onClick={() => handleAdd(item) }>+</button> */}
-                                        <b>Quantity:</b><input type="text" maxLength="5" size="5" id="qtyText" value={item.quantity} onChange={(event) => handleQty(event, item)} />
-                                        {/* <button className="qtyButton" id="minus"> - </button> */}
+                                        <button className="qtyButton" id="plus" onClick={() => handleAdd(item)}>+</button>
+                                        {/* <b>Quantity:</b><input type="text" maxLength="5" size="5" id="qtyText" value={item.quantity} onChange={(event) => handleQty(event, item)} /> */}
+                                        <button className="qtyButton" id="minus" onClick={() => { handleMinus(item) }}> - </button>
                                     </div>
 
                                 </div>
@@ -204,7 +224,7 @@ Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
 Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
                                         )
                                         .join('\n')} */}
-                                        <Checkout token={token} cart={cart} setCart={setCart} />
+                                    <Checkout token={token} cart={cart} setCart={setCart} />
                                 </DialogContentText>
                             </DialogContent>
                             {/* <DialogActions>
