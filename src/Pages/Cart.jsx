@@ -57,39 +57,49 @@ export default function Cart({ token, cart, setCart }) {
     };
     // console.log(document.getElementById("qtyText").value)
 
-    function handleQty(event, item) {
+    function handleQty(event, targetItem) {
         event.target.value = Math.max(1, Math.min(20, parseInt(event.target.value)))
-        console.log("item in handleqty", item.quantity)
+        console.log("item in handleqty", targetItem.quantity)
         console.log ("input value", event.target.value)
         console.log("isnan", isNaN(event.target.value))
         if (event.target.value==="") {
             event.target.value = 1 //sets input value to   1 if form is empty
         }
-        console.log(event.target.value)
-        console.log(item)
+        console.log("value entered ",event.target.value)
+        console.log("target item is ", targetItem)
 
 
-        if (cart.some(e => e.id === item.id)) {
-            const newCart = cart.map(cartItem => {
-                if (cartItem.id === item.id) {
-                    let newItem = item
-                    newItem.quantity = parseInt(event.target.value)
-                    return newItem
-                } else {
-                    return item
-                }
-            })
-            setCart(newCart)
+        // if (cart.some(e => e.id === item.id)) {
+        //     const newCart = cart.map(cartItem => {
+        //         if (cartItem.id === item.id) {
+        //             let newItem = item
+        //             newItem.quantity = parseInt(event.target.value)
+        //             return newItem
+        //         } else {
+        //             return item
+        //         }
+        //     })
+        //     setCart(newCart)
 
 
-        } else {
-            let cartItem = {
-                ...product,
-                quantity: 1
-            }
-            setCart([...cart, cartItem]);
-        }
-
+        // } else {
+        //     let cartItem = {
+        //         ...product,
+        //         quantity: 1
+        //     }
+        //     setCart([...cart, cartItem]);
+        // }
+        setCart((prevCart) => {
+            return prevCart.map((item) => {
+                return item.id === targetItem.id
+                    ? {
+                        ...item,
+                        // quantity: item.quantity ? item.quantity + 1 : 1,
+                        quantity: Number(event.target.value) 
+                    }
+                    : item;
+            });
+        });
 
 
 
