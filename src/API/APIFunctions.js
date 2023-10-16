@@ -122,3 +122,23 @@ export async function addNewUser(username, password, firstname, lastname, email,
 
 
 }
+
+//deezer
+const url = 'https://deezerdevs-deezer.p.rapidapi.com/search?q=eminem';
+const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '8f8600ceb2msh4e54ddf3fad808ep1e3b72jsn7a865fdd233b',
+		'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
+	}
+};
+export async function fetchDeezerSearch() {
+  try {
+    const response = await fetch(url, options);
+    const result = await response.json();
+    // console.log("Eminem Result is", result)
+    return result;
+  } catch (err) {
+    console.error(err);
+  }
+}

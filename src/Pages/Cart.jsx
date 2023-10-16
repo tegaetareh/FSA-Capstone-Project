@@ -94,7 +94,7 @@ export default function Cart({ token, cart, setCart }) {
                 return item.id === targetItem.id
                     ? {
                         ...item,
-                        // quantity: item.quantity ? item.quantity + 1 : 1,
+                    
                         quantity: Number(event.target.value) 
                     }
                     : item;

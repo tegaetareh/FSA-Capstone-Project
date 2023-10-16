@@ -51,7 +51,7 @@ export default function Navbar({ cart, setCart, token, setToken }) {
                     <a href="#" onClick={handleLogout}>Logout</a>
                 </li>
                 <li>
-                    <Link to="/products">Shop Products</Link>
+                    <Link to="/products">Products</Link>
                 </li>
                 <li>
                     <Link to="/products">Categories</Link>

@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react"
-import { fetchProducts, fetchCategory } from "../API/APIFunctions"
+import { fetchProducts, fetchCategory, fetchDeezerSearch } from "../API/APIFunctions"
 import ProductCard from "../components/ProductCard"
 import { SampleData } from "../API/SampleData"
+
 
 
 
@@ -21,6 +22,11 @@ export default function Products({ token, cart, setCart }) {
 
         console.log("products", products)
     }
+    async function fetchDeezer() {
+        const result = await fetchDeezerSearch()
+        console.log("Deezer result in products page", result)
+    }
+    fetchDeezer()
     useEffect(() => {
         fetchData()
     }, [])

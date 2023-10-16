@@ -9,10 +9,12 @@ const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
 export default function AddToCart({ product, cart, setCart}) {
-
+// console.log("product in add to cart", product)
     const [open, setOpen] = React.useState(false);
    let token = localStorage.getItem('Token')
-      
+//    const { id, title, description, image, price, quantity } = product;
+   
+    
     const handleClick = () => {
         setOpen(true);
     };
@@ -78,7 +80,7 @@ export default function AddToCart({ product, cart, setCart}) {
             }
             setCart([...cart, cartItem]);
         }
-        // console.log("Product already in cart? ", cart.includes(product.id))
+
 
 
         localStorage.setItem('Cart', JSON.stringify(cart));
@@ -94,7 +96,7 @@ export default function AddToCart({ product, cart, setCart}) {
     return (
         <div className="btn_addToCart">
 
-            <button className="btn" onClick={() => add2Cart()}>Add to Cart</button>
+            <button className="btn" onClick={() => add2Cart()}>Add to Cart </button>
             <Snackbar
                 // sx={{ height: "100%" }} this makes it appear in the middle of the page
                 anchorOrigin={{
@@ -102,10 +104,10 @@ export default function AddToCart({ product, cart, setCart}) {
                    horizontal: "center"
                 }}
                 open={open}
-                autoHideDuration={3000}
+                autoHideDuration={2000}
                 onClose={handleClose}
             >
-               {(!token) ? <Alert severity="info">Please login to add items to Cart.</Alert> : <Alert severity="info">Items added to Cart.</Alert> }
+               {(!token) ? <Alert severity="info">Please login to add items to Cart.</Alert> : <Alert severity="info">Item added to Cart.</Alert> }
             </Snackbar>
            
         </div>
